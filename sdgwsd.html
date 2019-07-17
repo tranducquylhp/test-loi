@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<p id="gameBoard"></p>
+   <script>
+
+       
+          function GameBoard(width,height) {
+             
+              this.width=width;
+              this.height=height;
+
+              this.getWidth=function () {
+                  return this.width;
+              };
+              this.setWidth=function () {
+                  this.width=width;
+              };
+              
+              this.getHeight=function () {
+                  return this.height;
+              };
+              this.setHeight=function () {
+                  this.height=height;
+              };
+          }
+          
+          function Ball(x,y,speedX,speedY,radius) {
+              this.x=x;
+              this.y=y;
+              this.radius=radius;
+              this.speedX=speedX;
+              this.speedY=speedY
+              
+              this.getX=function () {
+                  return this.x;
+              };
+              this.getY=function () {
+                  return this.y;
+              };
+              this.getSpeedX=function () {
+                  return this.speedX;
+              };
+              this.getRadius=function () {
+                  return this.radius;
+              };
+              this.getSpeedY=function () {
+                  return this.speedY;
+              };
+              
+              this.setX=function (x) {
+                  this.x=x;
+              };
+              this.setY=function (y) {
+                  this.y=y;
+              };
+              this.setSpeedX=function (speedX) {
+                  this.speedX=speedX;
+              };
+              this.setRadius=function (radius) {
+                  this.radius=radius
+              };
+              this.setSpeedY=function (speedY) {
+                  this.speedY=speedY
+              };
+
+              this.drawBall=function () {
+                  ctx.clearRect(0,0,c.width,c.height);
+                  ctx.beginPath();
+                  ctx.arc(ball.getX(),ball.getY(),ball.getRadius(),0,2*Math.PI);
+                  ctx.fillStyle="red";
+                  ctx.fill();
+                  ctx.closePath();
+              };
+
+              this.moveBall=function () {
+                  this.getX += this.getSpeedX();
+                  this.getY += this.getSpeedY();
+
+                  this.left = this.getX - this.getRadius;
+                  this.top = this.getY - this.getRadius;
+                  this.right = this.getX+ this.getRadius;
+                  this.bottom = this.getY + this.getRadius;
+              };
+
+              this.checkBall=function (shapes) {
+                  if(this.left<=0||this.right>=this.getWidth) this.getSpeedX = -this.getSpeedX;
+                  if(this.top<=0|| this.bottom>=this.getHeight) this.getSpeedY = -this.getSpeedY;
+              }
+          }
+          
+          function Bar(widthBar,xBar) {
+              this.widthBar=widthBar;
+              this.xBar=xBar;
+
+              this.getWidthBar=function () {
+                  return this.widthBar;
+              };
+              this.getXBar=function () {
+                  return this.xBar;
+              };
+              this.setWidthBar=function (widthBar) {
+                  this.widthBar=widthBar;
+              };
+              this.setXBar=function (xBar) {
+                  this.xBar=xBar;
+              }
+
+          }
+          //tạo không gian game
+          let gameBoard =new GameBoard(500,600);
+          document.getElementById("gameBoard").innerHTML='<canvas id="myCanvas" width="'+gameBoard.getWidth()+'" height="'
+              +gameBoard.getHeight()+'" style="border: 1px solid black"></canvas>';
+// tạo 1 bóng
+          let ball= new Ball(200,400,3,3,10);
+          let c = document.getElementById("myCanvas");
+          let ctx = c.getContext("2d");
+          ball.drawBall();
+
+          
+
+
+
+
+
+
+
+
+
+          
+
+   </script>
+</body>
+</html>
